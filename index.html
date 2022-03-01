@@ -6,14 +6,12 @@
     <a-assets>
       <img id="imgSortida" src="assets/entragroc.png" >
       <img id="imgFantasma" src="assets/fantasma.png" >
+      <img id="imgCasa" src="assets/casamaldita.jpg" >
     </a-assets>
 
     
     <a-scene>
-      <a-sky color="#005"></a-sky>
-      <a-sphere position="0 2 -5" radius="1" color="#ff0"></a-sphere>
-      <a-sphere position="-5 2 0" radius="1" color="#0ff"></a-sphere>
-      <a-sphere position="0 2 5" radius="1" color="#f00"></a-sphere>
+      <a-sky src="#imgCasa"></a-sky>
       <a-sphere position="5 2 -5" radius="1"  src="#imgFantasma"
                 animation="property: rotation; dur: 10000;
                        to: 0 360 0; loop: true">          
