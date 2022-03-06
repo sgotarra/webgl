@@ -1,9 +1,19 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+        AFRAME.registerComponent("mylink", {
+        init: function() {  
+         this.el.addEventListener("click", (e) => {              
+            window.location = this.data.href;      
+           })
+        }
+      })
+    </script>
+
   </head>
   <body>
-  <a-scene>
+  <a-scene cursor="rayOrigin: mouse">
     <a-assets>
       <img id="imgSortida" src="assets/entragroc.png" >
       <img id="imgFantasma" src="assets/fantasma.png" >
@@ -11,19 +21,21 @@
       <a-asset-item id="dracula" src="assets/dracula/scene.gltf"></a-asset-item>
     </a-assets>
     
-     <a-entity>
-        <a-camera id="camera" wasd-controls-enabled="false">         
-          <a-ring radius-outer="0.03" radius-inner="0.02"
-            position="0 0 -1"
-            material="color: cyan; shader: flat"
-            cursor="maxDistance: 30; fuse: true;">
-            <a-animation begin="click" easing="ease-in" attribute="scale"
-              fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-            <a-animation begin="fusing" easing="ease-in" attribute="scale"
-              fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-          </a-ring>
-        </a-camera>
-      </a-entity>
+    <a-entity camera look-controls wasd-controls="false">
+    <!-- fuseTimeout = el temps que triga en fer click des de que es posiciona sobre un objecte-->
+     <a-entity cursor="fuse: true; fuseTimeout: 2000"
+           position="0 0 -1"
+           geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+           material="color: red; shader: flat"
+           animation="property: components.material.material.color;
+                 type: color;
+                 to: white;
+                 dur: 1000;
+                 dir: alternate;
+                 loop: true">
+     </a-entity>
+    </a-entity>
+
     
     
       <a-sky src="#imgCasa"></a-sky>
@@ -34,7 +46,7 @@
       <a-entity gltf-model="#dracula" position="0 -3.5 -5" scale="0.02 0.02 0.02"
                 animation="property: position; dur: 2000; from: 0 -3.5 -5; to: 0 -3 -5; dir: alternate; loop: true">         
       </a-entity>
-      <a-plane position="-1.5 2 1.5" src="#imgSortida" rotation="0 150 0"  transparent="true"></a-plane>
+      <a-plane position="-1.5 2 1.5" src="#imgSortida" rotation="0 150 0"  transparent="true" mylink="href: https://www.wikipedia.org/;"></a-plane>
     </a-scene>
   </body>
 </html>
